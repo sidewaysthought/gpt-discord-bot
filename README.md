@@ -34,6 +34,7 @@ This bot uses the [OpenAI Python Library](https://github.com/openai/openai-pytho
 
 1. Copy `.env.example` to `.env` and start filling in the values as detailed below
 1. Go to https://beta.openai.com/account/api-keys, create a new API key, and fill in `OPENAI_API_KEY`
+1. (Optional) Set `OPENAI_API_BASE` to the API endpoint you want the bot to use. Defaults to `https://api.openai.com/v1`
 1. Create your own Discord application at https://discord.com/developers/applications
 1. Go to the Bot tab and click "Add Bot"
     - Click "Reset Token" and fill in `DISCORD_BOT_TOKEN`
