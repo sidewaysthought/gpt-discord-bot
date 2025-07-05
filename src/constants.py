@@ -24,6 +24,7 @@ DISCORD_CLIENT_ID = os.environ["DISCORD_CLIENT_ID"]
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 OPENAI_API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
 DEFAULT_MODEL = os.environ["DEFAULT_MODEL"]
+IMAGE_GENERATION_MODEL = os.environ.get("IMAGE_GENERATION_MODEL", "dall-e-3")
 
 ALLOWED_SERVER_IDS: List[int] = []
 server_ids = os.environ["ALLOWED_SERVER_IDS"].split(",")

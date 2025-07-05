@@ -28,7 +28,8 @@ This bot uses the [OpenAI Python Library](https://github.com/openai/openai-pytho
 - The entire thread will be passed to the model for each request, so the model will remember previous messages in the thread
 - when the context limit is reached, or a max message count is reached in the thread, bot will close the thread
 - you can customize the bot instructions by modifying `config.yaml`
-- you can change the model, the default value is `gpt-3.5-turbo`
+- you can change the chat model via the `.env` variable `DEFAULT_MODEL`
+- you can set the model used for image generation with `IMAGE_GENERATION_MODEL`
 
 # Setup
 
@@ -42,6 +43,7 @@ This bot uses the [OpenAI Python Library](https://github.com/openai/openai-pytho
     - Enable "Message Content Intent" under "Privileged Gateway Intents"
 1. Go to the OAuth2 tab, copy your "Client ID", and fill in `DISCORD_CLIENT_ID`
 1. Copy the ID the server you want to allow your bot to be used in by right clicking the server icon and clicking "Copy ID". Fill in `ALLOWED_SERVER_IDS`. If you want to allow multiple servers, separate the IDs by "," like `server_id_1,server_id_2`
+1. Optionally set `DEFAULT_MODEL` to choose the chat model and `IMAGE_GENERATION_MODEL` for image creation
 1. Install dependencies and run the bot
     ```
     pip install -r requirements.txt
