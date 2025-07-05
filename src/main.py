@@ -25,6 +25,7 @@ from src.utils import (
 )
 from src import completion
 from src.completion import generate_completion_response, process_response
+from src.image_generation import generate_image
 from src.moderation import (
     moderate_message,
     send_moderation_blocked_message,
@@ -181,6 +182,56 @@ async def chat_command(
         logger.exception(e)
         await int.response.send_message(
             f"Failed to start chat {str(e)}", ephemeral=True
+        )
+
+
+@tree.command(name="image", description="Generate an image from a prompt")
+@discord.app_commands.checks.has_permissions(send_messages=True)
+@discord.app_commands.checks.bot_has_permissions(send_messages=True)
+@app_commands.describe(prompt="The prompt to generate the image from")
+async def image_command(int: discord.Interaction, prompt: str):
+    if should_block(guild=int.guild):
+        return
+
+    user = int.user
+    try:
+        flagged_str, blocked_str = moderate_message(message=prompt, user=user)
+        await send_moderation_blocked_message(
+            guild=int.guild,
+            user=user,
+            blocked_str=blocked_str,
+            message=prompt,
+        )
+        if len(blocked_str) > 0:
+            await int.response.send_message(
+                "Your prompt has been blocked by moderation.", ephemeral=True
+            )
+            return
+
+        await send_moderation_flagged_message(
+            guild=int.guild,
+            user=user,
+            flagged_str=flagged_str,
+            message=prompt,
+            url=None,
+        )
+
+        async with int.channel.typing():
+            url = await generate_image(prompt)
+
+        if not url:
+            await int.response.send_message(
+                "Failed to generate image.", ephemeral=True
+            )
+            return
+
+        embed = discord.Embed(color=discord.Color.green())
+        embed.set_image(url=url)
+        await int.response.send_message(embed=embed)
+    except Exception as e:
+        logger.exception(e)
+        await int.response.send_message(
+            f"Failed to generate image {str(e)}", ephemeral=True
         )
 
 
