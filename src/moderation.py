@@ -4,10 +4,11 @@ from src.constants import (
     SERVER_TO_MODERATION_CHANNEL,
     MODERATION_VALUES_FOR_BLOCKED,
     MODERATION_VALUES_FOR_FLAGGED,
+    OPENAI_API_BASE,
 )
 from openai import OpenAI
 
-client = OpenAI()
+client = OpenAI(base_url=OPENAI_API_BASE)
 from typing import Optional, Tuple
 import discord
 from src.utils import logger

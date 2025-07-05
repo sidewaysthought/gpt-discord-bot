@@ -22,6 +22,7 @@ EXAMPLE_CONVOS = CONFIG.example_conversations
 DISCORD_BOT_TOKEN = os.environ["DISCORD_BOT_TOKEN"]
 DISCORD_CLIENT_ID = os.environ["DISCORD_CLIENT_ID"]
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
+OPENAI_API_BASE = os.environ.get("OPENAI_API_BASE", "https://api.openai.com/v1")
 DEFAULT_MODEL = os.environ["DEFAULT_MODEL"]
 
 ALLOWED_SERVER_IDS: List[int] = []

@@ -9,6 +9,7 @@ from src.constants import (
     BOT_INSTRUCTIONS,
     BOT_NAME,
     EXAMPLE_CONVOS,
+    OPENAI_API_BASE,
 )
 import discord
 from src.base import Message, Prompt, Conversation, ThreadConfig
@@ -38,7 +39,7 @@ class CompletionData:
     status_text: Optional[str]
 
 
-client = AsyncOpenAI()
+client = AsyncOpenAI(base_url=OPENAI_API_BASE)
 
 
 async def generate_completion_response(
